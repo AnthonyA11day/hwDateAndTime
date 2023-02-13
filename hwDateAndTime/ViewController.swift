@@ -65,8 +65,15 @@ final class ViewController: UIViewController {
     //MARK: action
     @objc func refreshAction() {
         
+        let sender = UIDatePicker()
+        sender.date = .now
+        
+        var formatter = DateFormatter()
+        formatter.dateFormat = "d MMM yyyy г., h:mm:ss a"
+        formatter.locale = .current
+        formatter.timeZone = .autoupdatingCurrent
 
+        label.text = formatter.string(from: sender.date)
     }
-
 }
 
