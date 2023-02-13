@@ -11,6 +11,7 @@ final class ViewController: UIViewController {
 
     private var label = UILabel()
     private var refreshButton = UIButton()
+    private var holdTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ final class ViewController: UIViewController {
         title = "Current Date and Time"
         addLabel()
         addButton()
+        createTimer()
     }
     
     //MARK: create label
@@ -68,7 +70,7 @@ final class ViewController: UIViewController {
         let sender = UIDatePicker()
         sender.date = .now
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "d MMM yyyy г., h:mm:ss a"
         formatter.locale = .current
         formatter.timeZone = .autoupdatingCurrent
@@ -77,3 +79,17 @@ final class ViewController: UIViewController {
     }
 }
 
+//MARK: timer
+extension ViewController {
+    func createTimer() {
+        holdTimer = Timer.scheduledTimer(timeInterval: 5,
+                                         target: self,
+                                         selector: #selector(counter),
+                                         userInfo: nil,
+                                         repeats: true)
+    }
+
+    @objc func counter() {
+        refreshAction()
+    }
+}
