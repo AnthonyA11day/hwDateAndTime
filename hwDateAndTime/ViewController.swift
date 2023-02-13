@@ -10,7 +10,8 @@ import UIKit
 final class ViewController: UIViewController {
 
     private var label = UILabel()
-
+    private var refreshButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createSubview()
@@ -20,6 +21,7 @@ final class ViewController: UIViewController {
         view.backgroundColor = .systemGray4
         title = "Current Date and Time"
         addLabel()
+        addButton()
     }
     
     //MARK: create label
@@ -42,6 +44,29 @@ final class ViewController: UIViewController {
         ])
     }
     
+    func addButton() {
+//        refreshButton.backgroundColor = .orange
+        refreshButton.setTitle("Refresh", for: .normal)
+        refreshButton.setTitleColor(.systemBlue, for: .normal)
+        refreshButton.setTitleColor(.black, for: .highlighted)
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
+
+        view.addSubview(refreshButton)
+        
+        NSLayoutConstraint.activate([
+            refreshButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16 * 3),
+            refreshButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16 * 6),
+            refreshButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16 * 6),
+            refreshButton.heightAnchor.constraint(equalToConstant: 16 * 2)
+        ])
+    }
+    
+    //MARK: action
+    @objc func refreshAction() {
+        
+
+    }
 
 }
 
