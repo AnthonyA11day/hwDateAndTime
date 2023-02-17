@@ -28,14 +28,12 @@ final class ViewController: UIViewController {
     
     //MARK: create label
     func addLabel() {
-//        label.backgroundColor = .orange
         label.text = "10 февр. 2023 г., 11:45:54 AM"
         label.textAlignment = .center
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 40)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
-
         view.addSubview(label)
         
         NSLayoutConstraint.activate([
@@ -47,13 +45,11 @@ final class ViewController: UIViewController {
     }
     
     func addButton() {
-//        refreshButton.backgroundColor = .orange
         refreshButton.setTitle("Refresh", for: .normal)
         refreshButton.setTitleColor(.systemBlue, for: .normal)
         refreshButton.setTitleColor(.black, for: .highlighted)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         refreshButton.addTarget(self, action: #selector(refreshAction), for: .touchUpInside)
-
         view.addSubview(refreshButton)
         
         NSLayoutConstraint.activate([
@@ -71,11 +67,13 @@ final class ViewController: UIViewController {
         sender.date = .now
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "d MMM yyyy г., h:mm:ss a"
         formatter.locale = .current
         formatter.timeZone = .autoupdatingCurrent
+        formatter.dateFormat = "d MMM yyyy г., h:mm:ss a"
 
         label.text = formatter.string(from: sender.date)
+        holdTimer.invalidate()
+        createTimer()
     }
 }
 
